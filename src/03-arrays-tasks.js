@@ -513,13 +513,9 @@ function getIdentityMatrix(n) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
-  // const arr = [];
-  // while (start <= end) {
-  //   arr.push(start += 1);
-  // }
-  // return arr;
+function getIntervalArray(start, end) {
+  // throw new Error('Not implemented');
+  return new Array(end - start + 1).fill(0).map((el, i) => start + i);
 }
 
 /**
@@ -604,8 +600,10 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  // throw new Error('Not implemented');
+  if (indexes.length === 1) return arr[indexes];
+  return getElementByIndexes(arr[0], indexes.slice(1));
 }
 
 
@@ -627,8 +625,12 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  // throw new Error('Not implemented');
+  const newArr = Math.floor(arr.length / 2);
+  const start = arr.splice(0, newArr);
+  const end = arr.splice(arr.length - newArr, arr.length);
+  return [...end, ...arr, ...start];
 }
 
 
